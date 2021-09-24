@@ -9,7 +9,7 @@
   bottom: 0;
 }
 
-#app .container {
+#app .layout {
   width: 376px;
   height: 666px;
   z-index: 100;
@@ -19,7 +19,7 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .9);
 }
 
-#app .container-view {
+#app .layout-view {
   padding: 20px;
 }
 

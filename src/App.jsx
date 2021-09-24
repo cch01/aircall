@@ -5,9 +5,9 @@ import Header from './Header.jsx';
 
 const App = () => {
   return (
-    <div className='container'>
+    <div className='layout'>
       <Header/>
-      <div className="container-view">Some activities should be here</div>
+      <div className="layout-view">Some activities should be here</div>
     </div>
   );
 };
