@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import Tab from './Tab.jsx';
 
 const Header = ({ currentTab }) => (
@@ -13,5 +14,9 @@ const Header = ({ currentTab }) => (
     </div>
   </div>
 );
+
+Header.propTypes = {
+  currentTab: PropTypes.oneOf(['inbox', 'archive']).isRequired,
+};
 
 export default Header;
