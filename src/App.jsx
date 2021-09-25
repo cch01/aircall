@@ -1,9 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
+import {
+  Switch, Route, Redirect, useLocation,
+} from 'react-router-dom';
+import { PageTransition } from '@steveeeie/react-page-transition';
 
 import Header from './components/Header.jsx';
-import Activity from './components/Activity.jsx';
-import Section from './components/Section.jsx';
 import InboxList from './components/InboxList.jsx';
 import ArchiveList from './components/ArchiveList.jsx';
 
@@ -141,16 +142,27 @@ const demo = [
     call_type: 'answered',
   },
 ];
-const App = () => (
-  <div className="layout">
-    <Header currentTab="inbox" />
-    <div className="h-full">
-      <ArchiveList activities={demo} />
-      {/* <InboxList activities={demo} /> */}
-    </div>
-  </div>
-);
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const App = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+  return (
+    <div className="layout">
+      <Header currentPath={location.pathname ?? '/inbox'} />
+      <div className="h-full">
+        <PageTransition
+          preset="moveToLeftFromRight"
+          transitionKey={location.pathname}
+        >
+          <Switch>
+            <Route exact path="/inbox" render={() => <InboxList activities={demo} />} />
+            <Route exact path="/archives" render={() => <ArchiveList activities={demo} />} />
+            <Route path="*" render={() => <Redirect to="/inbox" />} />
+          </Switch>
+        </PageTransition>
+      </div>
+    </div>
+  );
+};
 
 export default App;
