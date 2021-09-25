@@ -1,10 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import _ from 'lodash';
-import { ArchiveIcon } from './icons.jsx';
-import Section from './Section.jsx';
-import Activity from './Activity.jsx';
+import { ArchiveIcon } from './Icons.jsx';
+import ActivityList from './ActivityList.jsx';
 
 const ArchiveAllButton = () => (
   <div className="rounded-lg border w-full flex p-4 justify-center items-center items-center">
@@ -13,31 +10,12 @@ const ArchiveAllButton = () => (
   </div>
 );
 
-const InboxList = ({ activities }) => {
-  const activitiesByDate = {};
-
-  activities.forEach((activity) => {
-    const key = useMemo(() => moment(activity.created_at).format('LL'), [activity.created_at]);
-    if (!(key in activitiesByDate)) activitiesByDate[key] = [activity];
-    else activitiesByDate[key].push(activity);
-  });
-
-  const fullItemList = useMemo(() => {
-    const list = [];
-    _.keys(activitiesByDate).forEach((date) => {
-      list.push(<Section title={date} key={date} />);
-      list.push(...activitiesByDate[date].map((_activity) => <Activity activityData={_activity} key={_activity.id} />));
-    });
-    return list;
-  }, [activitiesByDate]);
-
-  return (
-    <div className="w-full space-y-4">
-      <ArchiveAllButton />
-      {fullItemList}
-    </div>
-  );
-};
+const InboxList = ({ activities }) => (
+  <div className="w-full h-full space-y-4 overflow-scroll p-4 pb-12">
+    <ArchiveAllButton />
+    <ActivityList activities={activities} />
+  </div>
+);
 
 InboxList.propTypes = {
   activities: PropTypes.arrayOf(PropTypes.object).isRequired,

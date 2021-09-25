@@ -17,9 +17,18 @@
   background: white;
   border-radius: 3px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .9);
+  overflow: clip
 }
 
-#app .layout-view {
-  padding: 1rem;
+::-webkit-scrollbar {
+  width: 4px;
+  margin: 0px;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2)
+}
+
+::-webkit-scrollbar-track {
+  background-color: initial;
+}

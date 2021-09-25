@@ -6,7 +6,7 @@ import moment from 'moment';
 import classnames from 'classnames';
 import {
   InboundIcon, OutboundIcon, PhoneMissedIcon, PhoneAnsweredIcon, VoicemailIcon, UnArchiveIcon, ArchiveIcon,
-} from './icons.jsx';
+} from './Icons.jsx';
 
 const directionIconMapper = {
   inbound: <InboundIcon />,
@@ -31,7 +31,7 @@ const Activity = ({
   activityData, onChangeArchiveState,
 }) => {
   const {
-    id, created_at, direction, from, to, via, duration, is_archived, call_type,
+    id, created_at, direction, from, via, duration, is_archived, call_type,
   } = activityData;
   const [isExpanded, setIsExpanded] = useState(false);
   const time = useMemo(() => moment(created_at).format('HH:mm a'), [created_at]);
@@ -39,12 +39,12 @@ const Activity = ({
 
   return (
     <div className="rounded-lg border w-full flex flex-col p-2 items-center transition-all">
-      <div className="flex flex-row w-full h-8 justify-between">
+      <div className="flex flex-row w-full justify-between">
         <div className="flex flex-row items-center">
           <div className="w-4 h-4 align-middle">{directionIconMapper[direction]}</div>
-          <div className="ml-1 flex flex-col justify-evenly space-y-1">
-            <div className="font-medium text-left ">{from}</div>
-            <div className="text-gray-300 text-xs">{`Tried to call on ${via}`}</div>
+          <div className="ml-1 flex flex-col">
+            <div className="font-medium">{from}</div>
+            <div className="text-gray-300 text-xs mt-1">{`Tried to call on ${via}`}</div>
           </div>
         </div>
         <div className="flex flex-row items-center space-x-2">
@@ -76,7 +76,6 @@ Activity.propTypes = {
     created_at: PropTypes.string.isRequired,
     direction: PropTypes.oneOf(['inbound', 'outbound']).isRequired,
     from: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
     via: PropTypes.string.isRequired,
     duration: PropTypes.string.isRequired,
     is_archived: PropTypes.bool.isRequired,
