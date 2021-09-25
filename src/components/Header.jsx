@@ -5,8 +5,10 @@ import Tab from './Tab.jsx';
 
 const Header = ({ currentPath }) => {
   const history = useHistory();
-  const onClickInbox = useCallback(() => history.replace('/inbox'), [history]);
-  const onClickArchives = useCallback(() => history.replace('/archives'), [history]);
+  const onClickInbox = useCallback(() => history.replace('/inbox'),
+    [history]);
+  const onClickArchives = useCallback(() => history.replace('/archives'),
+    [history]);
 
   return (
     <div className="h-12 w-full shadow flex flex-row justify-between items-end">
@@ -22,7 +24,7 @@ const Header = ({ currentPath }) => {
 };
 
 Header.propTypes = {
-  currentPath: PropTypes.oneOf(['/inbox', '/archive']).isRequired,
+  currentPath: PropTypes.oneOf(['/inbox', '/archives']).isRequired,
 };
 
 export default Header;

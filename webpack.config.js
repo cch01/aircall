@@ -50,4 +50,5 @@ module.exports = {
       filename: './index.html',
     }),
   ],
+  devtool: 'source-map',
 };
