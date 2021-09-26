@@ -1,6 +1,5 @@
 import './css/body.css';
 import './css/app.css';
-import './css/tailwind.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
