@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import ActivityStore from './acitivityStore';
+import ActivityStore from './activityStore';
 import UiStore from './uiStore';
 
 const uiStore = new UiStore();
