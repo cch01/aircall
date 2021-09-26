@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 const pageList = ['/inbox', '/archives'];
 
@@ -7,7 +7,7 @@ class UiStore {
     this.currentPage = '/inbox';
     this.enterAnimation = 'moveFromLeftFade';
     this.exitAnimation = 'moveToLeftFade';
-    makeAutoObservable(this, { refreshParams: action });
+    makeAutoObservable(this);
   }
 
   refreshParams(onPathNotFound) {

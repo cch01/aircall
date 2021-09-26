@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -9,7 +9,7 @@ const ActivityList = ({ activities }) => {
   const activitiesByDate = {};
 
   activities.forEach((activity) => {
-    const key = useMemo(() => moment(activity.created_at).format('LL'), [activity.created_at]);
+    const key = moment(activity.created_at).format('LL');
     if (!(key in activitiesByDate)) activitiesByDate[key] = [activity];
     else activitiesByDate[key].push(activity);
   });
