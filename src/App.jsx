@@ -8,13 +8,14 @@ import { observer } from 'mobx-react';
 import useStores from './lib/hooks/useStores';
 import Header from './components/Header.jsx';
 import InboxList from './pages/Inbox.jsx';
-import ArchiveList from './pages/Archive.jsx';
+import ArchiveList from './pages/Archives.jsx';
 
 const App = observer(() => {
   const location = useLocation();
   const history = useHistory();
-  const { uiStore } = useStores();
+  const { uiStore, activityStore } = useStores();
 
+  const { archives, inBox } = activityStore;
   const { enterAnimation, exitAnimation } = uiStore;
 
   useEffect(() => uiStore.refreshParams(() => history.replace(location.pathname)),
@@ -30,8 +31,8 @@ const App = observer(() => {
           transitionKey={location.pathname}
         >
           <Switch location={location}>
-            <Route exact path="/inbox" render={() => <InboxList />} />
-            <Route exact path="/archives" render={() => <ArchiveList />} />
+            <Route exact path="/inbox" render={() => <InboxList activities={inBox} />} />
+            <Route exact path="/archives" render={() => <ArchiveList activities={archives} />} />
             <Route path="*" render={() => <Redirect to="/inbox" />} />
           </Switch>
         </PageTransition>

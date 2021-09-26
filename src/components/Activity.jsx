@@ -6,7 +6,7 @@ import moment from 'moment';
 import classnames from 'classnames';
 import {
   InboundIcon, OutboundIcon, PhoneMissedIcon, PhoneAnsweredIcon, VoicemailIcon, UnArchiveIcon, ArchiveIcon,
-} from './Icons.jsx';
+} from './icons.jsx';
 import useStores from '../lib/hooks/useStores';
 
 const directionIconMapper = {

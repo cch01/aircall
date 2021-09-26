@@ -1,6 +1,6 @@
 import React from 'react';
-import { observer } from 'mobx-react';
-import { ArchiveIcon } from '../components/Icons.jsx';
+import PropTypes from 'prop-types';
+import { ArchiveIcon } from '../components/icons.jsx';
 import ActivityList from '../components/ActivityList.jsx';
 import useStores from '../lib/hooks/useStores';
 
@@ -11,9 +11,9 @@ const ArchiveAllButton = ({ onClick }) => (
   </div>
 );
 
-const InboxList = observer(() => {
+const Inbox = ({ activities }) => {
   const { activityStore } = useStores();
-  if (!activityStore.inBox.length) {
+  if (!activities?.length) {
     return (
       <div className="flex items-center justiy-center h-full w-full">
         <div className="text-lg text-gray-500 text-center w-full">No records found.</div>
@@ -24,9 +24,13 @@ const InboxList = observer(() => {
   return (
     <div className="w-full h-full space-y-4 overflow-scroll p-4 pb-12">
       <ArchiveAllButton onClick={activityStore.archiveAll} />
-      <ActivityList activities={activityStore.inBox} />
+      <ActivityList activities={activities} />
     </div>
   );
-});
+};
 
-export default InboxList;
+Inbox.propTypes = {
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default Inbox;

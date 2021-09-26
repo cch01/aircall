@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ActivityList from '../components/ActivityList.jsx';
-import { UnArchiveIcon } from '../components/Icons.jsx';
+import { UnArchiveIcon } from '../components/icons.jsx';
 import useStores from '../lib/hooks/useStores';
 
 const UnArchiveAllButton = ({ onClick }) => (
@@ -10,9 +11,9 @@ const UnArchiveAllButton = ({ onClick }) => (
   </div>
 );
 
-const ArchiveList = () => {
+const Archives = ({ activities }) => {
   const { activityStore } = useStores();
-  if (!activityStore.archives.length) {
+  if (!activities?.length) {
     return (
       <div className="flex items-center justiy-center h-full w-full">
         <div className="text-lg text-gray-500 text-center w-full">No records found.</div>
@@ -23,9 +24,13 @@ const ArchiveList = () => {
   return (
     <div className="w-full h-full space-y-4 overflow-scroll p-4 pb-12">
       <UnArchiveAllButton onClick={activityStore.unArchiveAll} />
-      <ActivityList activities={activityStore.archives} />
+      <ActivityList activities={activities} />
     </div>
   );
 };
 
-export default ArchiveList;
+Archives.propTypes = {
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default Archives;

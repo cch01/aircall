@@ -10,7 +10,7 @@ class ActivityStore {
     this.fetchActivities();
   }
 
-  async fetchActivities() {
+  fetchActivities = async() => {
     const { data: res } = await axios.get('https://aircall-job.herokuapp.com/activities');
     runInAction(() => {
       this.activities = res;
@@ -19,12 +19,12 @@ class ActivityStore {
     });
   }
 
-  async setArchiveState(id, state) {
+  setArchiveState = async(id, state) => {
     const { data } = await axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, { is_archived: state });
     if (data) this.fetchActivities();
   }
 
-  async archiveAll() {
+  archiveAll = async() => {
     const result = await Promise.all(this.inBox.map(async ({ id }) => {
       const { data } = await axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, { is_archived: true });
       return data;
@@ -32,7 +32,7 @@ class ActivityStore {
     if (!result.some((val) => !val)) this.fetchActivities();
   }
 
-  async unArchiveAll() {
+  unArchiveAll = async () => {
     const result = await Promise.all(this.archives.map(async ({ id }) => {
       const { data } = await axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, { is_archived: false });
       return data;
