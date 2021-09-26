@@ -24,7 +24,7 @@ const Header = ({ currentPath }) => {
 };
 
 Header.propTypes = {
-  currentPath: PropTypes.oneOf(['/inbox', '/archives']).isRequired,
+  currentPath: PropTypes.oneOf(['/inbox', '/archives', '/']).isRequired,
 };
 
 export default Header;

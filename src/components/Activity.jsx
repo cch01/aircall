@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import {
   InboundIcon, OutboundIcon, PhoneMissedIcon, PhoneAnsweredIcon, VoicemailIcon, UnArchiveIcon, ArchiveIcon,
 } from './Icons.jsx';
+import useStores from '../lib/hooks/useStores';
 
 const directionIconMapper = {
   inbound: <InboundIcon />,
@@ -27,15 +28,16 @@ const callStatusTextMapper = {
   voicemail: 'Voicemail',
 };
 
-const Activity = ({
-  activityData, onChangeArchiveState,
-}) => {
+const Activity = ({ activityData }) => {
   const {
     id, created_at, direction, from, via, duration, is_archived, call_type,
   } = activityData;
+  const { activityStore } = useStores();
   const [isExpanded, setIsExpanded] = useState(false);
+
   const time = useMemo(() => moment(created_at).format('HH:mm a'), [created_at]);
   const onChangeExpandState = useCallback(() => setIsExpanded(!isExpanded), [setIsExpanded, isExpanded]);
+  const onChangeArchiveState = useCallback(() => activityStore.setArchiveState(id, !is_archived), [activityStore.setArchiveState]);
 
   return (
     <div className="rounded-lg border w-full flex flex-col p-2 items-center transition-all">
@@ -62,7 +64,7 @@ const Activity = ({
             <div>{`Duration: ${duration} s`}</div>
           </div>
         </div>
-        <div onClick={() => onChangeArchiveState(id)} className="cursor-pointer flex justify-center items-center p-2 h-4 w-4">
+        <div onClick={() => onChangeArchiveState()} className="cursor-pointer flex justify-center items-center p-2 h-4 w-4">
           {is_archived ? <UnArchiveIcon /> : <ArchiveIcon />}
         </div>
       </div>
@@ -81,7 +83,6 @@ Activity.propTypes = {
     is_archived: PropTypes.bool.isRequired,
     call_type: PropTypes.oneOf(['missed', 'answered', 'voicemail']).isRequired,
   }).isRequired,
-  onChangeArchiveState: PropTypes.func.isRequired,
 };
 
 export default Activity;

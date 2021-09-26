@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ArchiveIcon } from './Icons.jsx';
 import ActivityList from './ActivityList.jsx';
+import useStores from '../lib/hooks/useStores';
 
-const ArchiveAllButton = () => (
-  <div className="rounded-lg border w-full flex p-4 justify-center items-center items-center">
+const ArchiveAllButton = ({ onClick }) => (
+  <div onClick={onClick} className="rounded-lg border w-full flex p-4 justify-center items-center items-center cursor-pointer">
     <div className="h-4 w-4"><ArchiveIcon /></div>
     <div className="ml-2">Archive all calls</div>
   </div>
 );
 
 const InboxList = ({ activities }) => {
+  const { activityStore } = useStores();
   if (!activities?.length) {
     return (
       <div className="flex items-center justiy-center h-full w-full">
@@ -21,7 +23,7 @@ const InboxList = ({ activities }) => {
 
   return (
     <div className="w-full h-full space-y-4 overflow-scroll p-4 pb-12">
-      <ArchiveAllButton />
+      <ArchiveAllButton onClick={activityStore.archiveAll} />
       <ActivityList activities={activities} />
     </div>
   );
