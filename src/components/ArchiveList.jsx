@@ -6,7 +6,7 @@ import useStores from '../lib/hooks/useStores';
 
 const UnArchiveAllButton = ({ onClick }) => (
   <div onClick={onClick} className="rounded-lg border w-full flex p-4 justify-center items-center items-center cursor-pointer">
-    <div className="h-4 w-4"><UnArchiveIcon /></div>
+    <div className="h-full w-4"><UnArchiveIcon /></div>
     <div className="ml-2">Unarchive all calls</div>
   </div>
 );

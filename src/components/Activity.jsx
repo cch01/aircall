@@ -20,7 +20,7 @@ const callStatusIconMapper = {
   voicemail: <VoicemailIcon />,
 };
 
-const UpDownIcon = ({ isExpanded }) => <i className={classnames({ 'transform rotate-180': isExpanded }, 'cursor-pointer fa-solid fa-angle-down font-medium')} />;
+const UpDownIcon = ({ isExpanded }) => <i className={classnames({ 'transform rotate-180': isExpanded }, 'fa-solid fa-angle-down font-medium')} />;
 
 const callStatusTextMapper = {
   missed: 'Missed Call',
@@ -40,18 +40,18 @@ const Activity = ({ activityData }) => {
   const onChangeArchiveState = useCallback(() => activityStore.setArchiveState(id, !is_archived), [activityStore.setArchiveState]);
 
   return (
-    <div className="rounded-lg border w-full flex flex-col p-2 items-center transition-all">
+    <div onClick={onChangeExpandState} className="rounded-lg border w-full flex flex-col p-2 items-center transition-all cursor-pointer">
       <div className="flex flex-row w-full justify-between">
         <div className="flex flex-row items-center">
           <div className="w-4 h-4 align-middle">{directionIconMapper[direction]}</div>
           <div className="ml-1 flex flex-col">
             <div className="font-medium">{from}</div>
-            <div className="text-gray-300 text-xs mt-1">{`Tried to call on ${via}`}</div>
+            <div className="text-gray-400 text-xs mt-1">{`Tried to call on ${via}`}</div>
           </div>
         </div>
         <div className="flex flex-row items-center space-x-2">
-          <div className="text-gray-300">{time}</div>
-          <div onClick={onChangeExpandState} className="flex justify-center items-center p-2 h-4 w-4">
+          <div className="text-gray-400">{time}</div>
+          <div className="flex justify-center items-center p-2 h-4 w-4">
             <UpDownIcon isExpanded={isExpanded} />
           </div>
         </div>
@@ -64,7 +64,7 @@ const Activity = ({ activityData }) => {
             <div>{`Duration: ${duration} s`}</div>
           </div>
         </div>
-        <div onClick={() => onChangeArchiveState()} className="cursor-pointer flex justify-center items-center p-2 h-4 w-4">
+        <div onClick={() => onChangeArchiveState()} className={classnames({ hidden: !isExpanded }, 'cursor-pointer flex justify-center items-center p-2 h-4 w-4')}>
           {is_archived ? <UnArchiveIcon /> : <ArchiveIcon />}
         </div>
       </div>

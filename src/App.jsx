@@ -42,7 +42,7 @@ const demo = [
     via: 'Support FR',
     duration: '180',
     is_archived: false,
-    call_type: 'answered',
+    call_type: 'missed',
   },
   {
     id: 7831,
